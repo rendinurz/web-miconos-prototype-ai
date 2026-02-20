@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT. Miconos | Precision Digital Microscopy</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0A2342; /* Professional Deep Blue */
+            --secondary-blue: #2CA58D; /* Medical Teal/Green tint for accents */
+            --medical-white: #F4F7F6; /* Slightly off-white for less eye strain */
+            --pure-white: #FFFFFF;
+            --accent-orange: #E67E22; /* Subtle Orange */
+            --text-dark: #2C3E50;
+            --text-light: #95A5A6;
+            --border-color: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--medical-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .nav-link, .btn {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: var(--pure-white);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--accent-orange); }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: var(--accent-orange); }
+
+        .btn-nav {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary-blue);
+            color: var(--pure-white);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.4)), 
+                        url('https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=2525&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--pure-white);
+            padding: 0 20px;
+            margin-top: 60px; /* Offset for fixed header */
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: var(--pure-white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
+        }
+
+        /* --- FEATURES / ICONS SECTION --- */
+        .features {
+            padding: 5rem 10%;
+            background: var(--pure-white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header .divider {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-orange);
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+
+        .feature-card:hover {
+            background: var(--medical-white);
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box svg {
+            width: 50px;
+            height: 50px;
+            stroke: var(--primary-blue);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- PRODUCTS SECTION --- */
+        .products {
+            padding: 5rem 10%;
+            background-color: var(--medical-white);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--pure-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 250px;
+            background: #eef2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+        }
+        
+        /* Simulating the microscope image with CSS */
+        .microscope-mockup {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            position: relative;
+        }
+        .microscope-mockup::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .product-info ul {
+            margin-bottom: 1.5rem;
+        }
+
+        .product-info li {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-info li::before {
+            content: '•';
+            color: var(--primary-blue);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* --- TKDN CERTIFIED SECTION --- */
+        .tkdn-section {
+            background: var(--primary-blue);
+            padding: 4rem 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--pure-white);
+        }
+
+        .tkdn-content {
+            max-width: 600px;
+        }
+
+        .tkdn-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .tkdn-badges {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .badge {
+            background: var(--pure-white);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .badge span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .badge strong {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #05162b;
+            color: var(--text-light);
+            padding: 4rem 10%;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--pure-white);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .tkdn-section { flex-direction: column; text-align: center; gap: 2rem; }
+            nav ul { display: none; } /* Simplified for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <!-- Simple SVG Logo Placeholder -->
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            PT. MICONOS
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link">Solutions</a></li>
+                <li><a href="#" class="nav-link">Products</a></li>
+                <li><a href="#" class="nav-link">Software</a></li>
+                <li><a href="#" class="nav-link">Support</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-nav">Contact Sales</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Clarity Beyond the<br>Microscopic Limit</h1>
+            <p>High-precision digital microscopy integrated with AI-driven analysis for modern laboratories.</p>
+            <a href="#products" class="btn-primary">Explore OptiLab Series</a>
+        </div>
+    </section>
+
+    <!-- Software Features / Icons -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Advanced Imaging Software</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="features-grid">
+            <!-- Icon 1: Automatic Measurement -->
+            <div class="feature-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M2 12h20M2 12l5-5M2 12l5 5M22 12l-5-5M22 12l-5 5"/></svg>
+                </div>
+                <h3>Automatic Measurement</h3>
+                <p>AI-powered edge detection for instant particle sizing and distance calculation.</p>
+            </div>
+
+            <!-- Icon 2: Image Capture -->
+            <div class="feature-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 10"/></svg>
+                </div>
+                <h3>High-Res Capture</h3>
+                <p>One-click 4K image and video capture with lossless compression.</p>
+            </div>
+
+            <!-- Icon 3: Database Integration -->
+            <div class="feature-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <h3>Database Integration</h3>
+                <p>Seamlessly sync data with LIMS and hospital information systems.</p>
+            </div>
+
+            <!-- Icon 4: Cloud Sharing -->
+            <div class="feature-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><polyline points="12 14 15 11 18 14"/><line x1="15" y1="11" x2="15" y2="17"/></svg>
+                </div>
+                <h3>Cloud Sharing</h3>
+                <p>Securely share diagnostic images with remote experts instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="section-header">
+            <h2>OptiLab Series</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="microscope-mockup"></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Entry Level</span>
+                    <h3>OptiLab One</h3>
+                    <ul>
+                        <li>5MP Digital Sensor</li>
+                        <li>USB 3.0 Interface</li>
+                        <li>Basic Analysis Suite</li>
+                    </ul>
+                    <a href="#" class="nav-link" style="font-weight: 700;">View Specs &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="microscope-mockup" style="border-color: var(--accent-orange);"></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Professional</span>
+                    <h3>OptiLab Pro</h3>
+                    <ul>
+                        <li>20MP Sony Sensor</li>
+                        <li>4K HDMI Output</li>
+                        <li>Advanced AI Measurement</li>
+                    </ul>
+                    <a href="#" class="nav-link" style="font-weight: 700;">View Specs &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="microscope-mockup" style="border-color: var(--primary-blue); border-width: 4px;"></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Industrial</span>
+                    <h3>OptiLab Max</h3>
+                    <ul>
+                        <li>Motorized Z-Axis</li>
+                        <li>Depth of Field Extension</li>
+                        <li>Full Cloud Integration</li>
+                    </ul>
+                    <a href="#" class="nav-link" style="font-weight: 700;">View Specs &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TKDN Section -->
+    <section class="tkdn-section">
+        <div class="tkdn-content">
+            <h2>Proudly Indonesian Innovation</h2>
+            <p>Miconos is committed to local manufacturing excellence. Our devices meet the highest standards of national content requirements, ensuring quality and local support.</p>
+        </div>
+        <div class="tkdn-badges">
+            <div class="badge">
+                <span>TKDN Level</span>
+                <strong>45%+</strong>
+            </div>
+            <div class="badge">
+                <span>Certification</span>
+                <strong>ISO 9001</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: white; margin-bottom: 1rem;">PT. MICONOS</div>
+                <p>Empowering science with precision digital optics.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">OptiLab One</a></li>
+                    <li><a href="#">OptiLab Pro</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 PT. Miconos. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
+```
